@@ -7,7 +7,7 @@ import lombok.Data;
 public class Result<T> {
     private Integer code;
     private String message;
-    private T date;
+    private T data;
 
     //私有化
     private Result (){
@@ -44,7 +44,7 @@ public class Result<T> {
     public static <T> Result<T> build(T body,ResultCodeEnum resultCodeEnum){
         Result<T> result = new Result<>();
         if(body !=null ){
-            result.setDate(body);
+            result.setData(body);
         }
         result.setCode(resultCodeEnum.getCode());
         result.setMessage(resultCodeEnum.getMessage());
