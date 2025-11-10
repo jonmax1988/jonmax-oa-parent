@@ -3,11 +3,10 @@ package com.jonmax.common.config.exception;
 import com.jonmax.common.result.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
-public class ClobalExceptionHandler {
+public class GlobalExceptionHandler {
     //全局异常处理，执行方法
     @ExceptionHandler(Exception.class)
     @ResponseBody
