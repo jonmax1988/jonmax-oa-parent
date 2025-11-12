@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jonmax.auth.service.SysRoleService;
 import com.jonmax.common.result.Result;
 import com.jonmax.model.system.SysRole;
+import com.jonmax.vo.system.AssginRoleVo;
 import com.jonmax.vo.system.SysRoleQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,14 +15,30 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "角色管理接口")
 @RestController
-@RequestMapping("/system/admin/sysRole")
+@RequestMapping("/admin/system/sysRole")
 public class SysRoleController {
     //http://localhost:8800/system/admin/sysRole/findAll
     @Autowired
     private SysRoleService sysRoleService;
+
+    //1 查询所有的角色 和 当前用户的所属的角色
+    @ApiOperation("获取用户角色")
+    @GetMapping("/toAssign/{userId}")
+    public Result toAssign(@PathVariable long userId){
+        Map<String,Object> map=sysRoleService.findRoleDataByUserId(userId);
+        return Result.ok(map);
+    }
+    //2 为用户分配角色
+    @ApiOperation("给用户分配角色")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestBody AssginRoleVo assginRoleVo){
+        sysRoleService.doAssign(assginRoleVo);
+        return Result.ok();
+    }
 
     //    @GetMapping("/findAll")
 //    public List<SysRole> findAll(){
@@ -91,9 +108,9 @@ public class SysRoleController {
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Long id) {
         boolean removedById = sysRoleService.removeById(id);
-        if(removedById){
+        if (removedById) {
             return Result.ok();
-        }else {
+        } else {
             return Result.fail();
         }
     }
@@ -101,11 +118,11 @@ public class SysRoleController {
     //批量删除
     @ApiOperation("批量删除")
     @DeleteMapping("/deleteBatch")
-    public Result deleteBatch(@RequestBody List<Long> ids){
+    public Result deleteBatch(@RequestBody List<Long> ids) {
         boolean removeByIds = sysRoleService.removeByIds(ids);
-        if(removeByIds){
+        if (removeByIds) {
             return Result.ok();
-        }else {
+        } else {
             return Result.fail();
         }
     }
