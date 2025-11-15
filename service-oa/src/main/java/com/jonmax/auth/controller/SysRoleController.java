@@ -11,6 +11,7 @@ import com.jonmax.vo.system.SysRoleQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +52,7 @@ public class SysRoleController {
         List<SysRole> list = sysRoleService.list();
         return Result.ok(list);
     }
-
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation("分页条件查询")
     @GetMapping("{page}/{limit}")
     public Result pageQueryRole(@PathVariable Long page,
@@ -65,7 +66,7 @@ public class SysRoleController {
         IPage<SysRole> pageModel = sysRoleService.page(pageParam, wrapper);
         return Result.ok(pageModel);
     }
-
+    @PreAuthorize("hasAuthority('bnt.sysRole.add')")
     @ApiOperation("添加角色接口")
     @PostMapping("/save")
     public Result save(@RequestBody SysRole sysRole) {
@@ -76,14 +77,14 @@ public class SysRoleController {
             return Result.fail();
         }
     }
-
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation("根据角色ID查询")
     @GetMapping("/get/{id}")
     public Result get(@PathVariable Long id) {
         SysRole role = sysRoleService.getById(id);
         return Result.ok(role);
     }
-
+    @PreAuthorize("hasAuthority('bnt.sysRole.update')")
     @ApiOperation("修改角色接口")
     @PutMapping("/update")
     public Result update(@RequestBody SysRole sysRole) {
@@ -104,6 +105,7 @@ public class SysRoleController {
     }
 
     //根据ID删除
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation("根据ID删除")
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Long id) {
@@ -117,6 +119,7 @@ public class SysRoleController {
 
     //批量删除
     @ApiOperation("批量删除")
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @DeleteMapping("/deleteBatch")
     public Result deleteBatch(@RequestBody List<Long> ids) {
         boolean removeByIds = sysRoleService.removeByIds(ids);
