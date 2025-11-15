@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jonmax.auth.service.SysUserService;
 import com.jonmax.common.result.Result;
+import com.jonmax.common.utils.MD5;
 import com.jonmax.model.system.SysUser;
 import com.jonmax.vo.system.SysUserQueryVo;
 import io.swagger.annotations.Api;
@@ -63,6 +64,10 @@ public class SysUserController {
     @ApiOperation(value = "新增用户")
     @PostMapping("save")
     public Result save(@RequestBody SysUser sysUser){
+        //对密码进行加密，使用MD5方式加密
+        String password = sysUser.getPassword();
+        String passwordMD5 = MD5.encrypt(password);
+        sysUser.setPassword(passwordMD5);
         sysUserService.save(sysUser);
         return Result.ok();
 

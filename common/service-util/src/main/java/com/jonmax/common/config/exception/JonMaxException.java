@@ -1,9 +1,7 @@
 package com.jonmax.common.config.exception;
 
 import com.jonmax.common.result.ResultCodeEnum;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class JonMaxException extends RuntimeException{

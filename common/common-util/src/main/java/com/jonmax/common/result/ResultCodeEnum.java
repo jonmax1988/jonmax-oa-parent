@@ -6,6 +6,8 @@ import lombok.Getter;
 public enum ResultCodeEnum {
     SUCCESS(200, "成功"),
     FAIL(201, "失败"),
+    FAIL_USER_PASSWORD(202, "用户或密码错误"),
+    USER_STATUS_WRONG(203, "用户被禁用，请联系管理员"),
 
     SERVICE_ERROR(2012, "服务异常"),
     DATA_ERROR(204, "数据异常"),

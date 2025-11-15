@@ -1,4 +1,4 @@
-package com.jonmax.common.result.jwt;
+package com.jonmax.common.jwt;
 import io.jsonwebtoken.*;
 import org.springframework.util.StringUtils;
 
