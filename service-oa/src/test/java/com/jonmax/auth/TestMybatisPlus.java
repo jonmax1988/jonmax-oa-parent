@@ -2,6 +2,7 @@ package com.jonmax.auth;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jonmax.ServiceAuthApplication;
 import com.jonmax.auth.mapper.SysRoleMapper;
 import com.jonmax.auth.service.SysRoleService;
 import com.jonmax.model.system.SysRole;
@@ -12,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Arrays;
 import java.util.List;
 
-@SpringBootTest
+@SpringBootTest(classes = ServiceAuthApplication.class)
 public class TestMybatisPlus {
 
     @Autowired

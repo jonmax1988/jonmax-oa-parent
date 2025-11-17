@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.jonmax.auth.mapper")
+@MapperScan(basePackages = {"com.jonmax.auth.mapper","com.jonmax.process.mapper"})
 public class MybatisPlusConfig {
     /**
      * 添加分页插件
