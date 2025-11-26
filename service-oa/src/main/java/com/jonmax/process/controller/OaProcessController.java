@@ -50,5 +50,6 @@ public class OaProcessController {
         IPage<ProcessVo> pageModel = processService.selectPage(pageParam,processQueryVo);
         return Result.ok(pageModel);
     }
+
 }
 
