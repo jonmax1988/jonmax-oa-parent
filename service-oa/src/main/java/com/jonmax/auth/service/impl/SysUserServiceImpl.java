@@ -6,7 +6,11 @@ import com.jonmax.auth.mapper.SysUserMapper;
 import com.jonmax.auth.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jonmax.model.system.SysUser;
+import com.jonmax.security.custom.LoginUserInfoHelper;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -34,5 +38,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         LambdaQueryWrapper<SysUser> wrapper =new LambdaQueryWrapper<>();
         wrapper.eq(SysUser::getUsername,username);
         return baseMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public Map<String, Object> getCurrentUser() {
+        SysUser sysUser = baseMapper.selectById(LoginUserInfoHelper.getUserId());
+        //SysDept sysDept = sysDeptService.getById(sysUser.getDeptId());
+        //SysPost sysPost = sysPostService.getById(sysUser.getPostId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", sysUser.getName());
+        map.put("phone", sysUser.getPhone());
+        //map.put("deptName", sysDept.getName());
+        //map.put("postName", sysPost.getName());
+        return map;
     }
 }
